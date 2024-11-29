@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel do Pedro</title>
+  <style>
+    /* Estilo base */
+    body {
+      font-family: "Courier New", Courier, monospace;
+      background-color: black;
+      color: #00ff00;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    h1, h2 {
+      margin: 20px 0;
+      text-shadow: 0 0 10px #00ff00;
+    }
+    p {
+      text-shadow: 0 0 5px #00ff00;
+    }
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 2px solid #00ff00;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: 0 0 20px #00ff00;
+    }
+
+    /* Estilo dos botões e campos */
+    input[type="text"], input[type="password"], button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 2px solid #00ff00;
+      background-color: black;
+      color: #00ff00;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+    input[type="text"]::placeholder, input[type="password"]::placeholder {
+      color: #00ff00;
+    }
+    button {
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+      overflow: hidden;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #00ff00, #004400);
+      color: black;
+      box-shadow: 0 0 15px #00ff00;
+    }
+    button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: rgba(0, 255, 0, 0.2);
+      transform: skewX(-30deg);
+      transition: left 0.5s ease;
+    }
+    button:hover::after {
+      left: 100%;
+    }
+
+    /* Pop-up de carregamento */
+    .popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: black;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #00ff00;
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      text-shadow: 0 0 5px #00ff00;
+    }
+  </style>
+</head>
+<body>
+  <h1>Bem vindo(a)! ao Painel do Pedro.</h1>
+  <p>Este site foi criado com o propósito de ser usado para o bem. Use-o com responsabilidade!</p>
+  <div class="container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <div class="message" id="loginMessage">
+      ✅ Login Liberado!
+      <h2>Busca de Dados</h2>
+      <input type="text" id="dataInput" placeholder="Puxar Dados">
+      <button onclick="search()">Buscar</button>
+      <p id="searchMessage"></p>
+    </div>
+  </div>
+
+  <!-- Pop-up -->
+  <div id="loadingPopup" class="popup">Carregando...</div>
+  <div id="successPopup" class="popup">Deu tudo certo! Agora verifique seu email.</div>
+
+  <footer>
+    © 2024 Pedro - Todos os direitos reservados.
+  </footer>
+
+  <script>
+    function login() {
+      const loginMessage = document.getElementById("loginMessage");
+      loginMessage.style.display = "block";
+    }
+
+    function search() {
+      // Mostra o pop-up de carregamento
+      const loadingPopup = document.getElementById("loadingPopup");
+      const successPopup = document.getElementById("successPopup");
+
+      loadingPopup.style.display = "block";
+
+      // Simula carregamento com tempo
+      setTimeout(() => {
+        loadingPopup.style.display = "none"; // Esconde o pop-up de carregamento
+        successPopup.style.display = "block"; // Mostra o pop-up de sucesso
+
+        // Esconde o pop-up de sucesso após 3 segundos
+        setTimeout(() => {
+          successPopup.style.display = "none";
+        }, 3000);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
